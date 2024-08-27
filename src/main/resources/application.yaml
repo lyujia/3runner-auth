@@ -1,0 +1,52 @@
+logging:
+  level:
+    root: debug
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  application:
+    name: 3runner-auth
+  security:
+    oauth2:
+      client:
+        registration:
+          payco:
+            client-id: 3RDUR8qJyORVrsI2PdkInS1
+            client-secret: yoA1FPvf5ievEnC7LkzJDp1x
+            redirect-uri: http://localhost:8080/auth/oauth2/callback/payco
+            authorization-grant-type: authorization_code
+            scope: idNo, email, mobile, name
+        provider:
+          payco:
+            authorization-uri: https://id.payco.com/oauth2.0/authorize
+            token-uri: https://id.payco.com/oauth2.0/token
+            user-info-uri: https://apis-payco.krp.toastoven.net/payco/friends/find_member_v2.json
+
+  jwt:
+    secret: aaaasqwlkljlfasdfqwerafcxvzpojijoijopjewndllllllsserrrrrrwqexc
+
+  data:
+    redis:
+      host: 133.186.241.167
+      port: 6379
+      database: 15
+      password: "*N2vya7H@muDTwdNMR!"
+  profiles:
+    active: dev
+
+management:
+  endpoint:
+    pause:
+      enabled: true
+    resume:
+      enabled: true
+    restart:
+      enabled: true
+
+
+server:
+  shutdown: graceful
+  port: 8090
+  netty:
+    connection-timeout: 30s
